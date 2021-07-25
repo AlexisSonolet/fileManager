@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>818</width>
+    <height>662</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -72,13 +72,76 @@
      </layout>
     </item>
     <item>
-     <widget class="QWidget" name="toolsSettingsWidget" native="true">
+     <widget class="QWidget" name="searchTabLayout" native="true">
       <property name="minimumSize">
        <size>
         <width>0</width>
         <height>20</height>
        </size>
       </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <layout class="QVBoxLayout" name="searchSettings_cb">
+         <item>
+          <widget class="QCheckBox" name="search_folderName_cb">
+           <property name="text">
+            <string>Folder name</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="search_fileName_cb">
+           <property name="text">
+            <string>File name</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="search_fileContent_cb">
+           <property name="text">
+            <string>File content</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="Line" name="line">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="search_line_le">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="search_launch_pb">
+         <property name="maximumSize">
+          <size>
+           <width>30</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>-o</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
     <item>
@@ -191,13 +254,22 @@
       <property name="opaqueResize">
        <bool>true</bool>
       </property>
-      <widget class="QTreeWidget" name="folderTreeWidget">
+      <widget class="QTreeView" name="folderTreeView">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <attribute name="headerVisible">
+        <bool>true</bool>
+       </attribute>
       </widget>
       <widget class="QWidget" name="verticalLayoutWidget">
        <layout class="QVBoxLayout" name="folderAreaLayout">
@@ -238,8 +310,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>208</width>
-             <height>400</height>
+             <width>267</width>
+             <height>384</height>
             </rect>
            </property>
           </widget>
@@ -256,7 +328,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>818</width>
      <height>26</height>
     </rect>
    </property>
