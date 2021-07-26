@@ -28,11 +28,20 @@ MainWindow::MainWindow(QWidget *parent)
     ui->searchTabLayout->hide();
 
     // Setup widgets
-    setupFileSystemTreeWidget();
+    // -> Top view
+    //   -> Search view
     ui->search_fileName_cb->setCheckState(Qt::CheckState::Checked);
     ui->search_folderName_cb->setCheckState(Qt::CheckState::Checked);
     ui->search_fileContent_cb->setCheckState(Qt::CheckState::Unchecked);
+    // -> Left view
+    //   -> Favorites
+    QListWidget* list = ui->favoritesListView;
+    list->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    list->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    list->setFixedHeight(list->sizeHintForRow(0) * list->count() + 2 * list->frameWidth());
 
+    //   -> treeWidget
+    setupFileSystemTreeWidget();
 }
 
 MainWindow::~MainWindow()
@@ -54,10 +63,17 @@ void MainWindow::setupFileSystemTreeWidget()
 {
     dirModel = new QFileSystemModel(this);
     dirModel->setRootPath(QDir::currentPath());
-    dirModel->setFilter(QDir::NoDotAndDotDot | QDir::Dirs);
+    qDebug() << QDir::currentPath();
+    dirModel->setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
+    QStringList stringFilter;
+    stringFilter << "[A-z]*";
+    dirModel->setNameFilters(stringFilter);
+    dirModel->setNameFilterDisables(false);
 
     // Setup the view
     ui->folderTreeView->setModel(dirModel);
+    const QString rootPath = QDir::homePath();
+    ui->folderTreeView->setRootIndex(dirModel->index(rootPath));
 
     // Hide other columns
     for (int i=1; i < dirModel->columnCount(); i++) {

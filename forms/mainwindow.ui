@@ -37,11 +37,6 @@ QTreeView {
 background: #333333;
 }
 
-/* List view */
-QListView {
-background: #333333;
-}
-
 /* Scroll bar */
 QScrollBar:vertical {
 border: 1px solid #999999;
@@ -317,28 +312,100 @@ subcontrol-origin: margin;
       <property name="opaqueResize">
        <bool>true</bool>
       </property>
-      <widget class="QTreeView" name="folderTreeView">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>16777215</height>
-        </size>
-       </property>
+      <widget class="QWidget" name="verticalWidget_2" native="true">
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true">background: #333333;
+border: 1px solid #999999;
+border-radius: 5px;</string>
        </property>
-       <property name="headerHidden">
-        <bool>true</bool>
-       </property>
-       <attribute name="headerVisible">
-        <bool>false</bool>
-       </attribute>
+       <layout class="QVBoxLayout" name="leftViewLayout">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Myanmar Text</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border: None</string>
+          </property>
+          <property name="text">
+           <string>    Favorites</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="favoritesListView">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border: None;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Myanmar Text</family>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border: None;</string>
+          </property>
+          <property name="text">
+           <string>    Files</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTreeView" name="folderTreeView">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">border: None;</string>
+          </property>
+          <property name="headerHidden">
+           <bool>true</bool>
+          </property>
+          <attribute name="headerVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="verticalLayoutWidget">
        <layout class="QVBoxLayout" name="folderAreaLayout">
@@ -373,7 +440,14 @@ subcontrol-origin: margin;
          </layout>
         </item>
         <item>
-         <widget class="QListView" name="listView"/>
+         <widget class="QListView" name="listView">
+          <property name="styleSheet">
+           <string notr="true">/* List view */
+QListView {
+background: #333333;
+}</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
