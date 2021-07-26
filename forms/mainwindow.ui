@@ -447,6 +447,9 @@ QListView {
 background: #333333;
 }</string>
           </property>
+          <property name="viewMode">
+           <enum>QListView::IconMode</enum>
+          </property>
          </widget>
         </item>
        </layout>

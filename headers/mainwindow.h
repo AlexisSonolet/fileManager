@@ -4,8 +4,10 @@
 #include <QMainWindow>
 #include <QDialog>
 #include <QtCore>
-#include <QtGui>
+#include <QDir>
 #include <QFileSystemModel>
+#include <QListView>
+#include <QTreeView>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,10 +22,14 @@ public:
     ~MainWindow();
 
     // Setup widgets
-    void setupFileSystemTreeWidget();
+    void setupFileSystemModel();
 
 private slots:
     void on_searchSettigns_pb_clicked();
+
+    void on_folderTreeView_activated(const QModelIndex &index);
+
+    void on_listView_activated(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;
@@ -32,5 +38,8 @@ private:
 
     // Setup widgets
     QFileSystemModel *dirModel;
+
+    // Current directory
+    QDir currentDir;
 };
 #endif // MAINWINDOW_H

@@ -41,7 +41,8 @@ MainWindow::MainWindow(QWidget *parent)
     list->setFixedHeight(list->sizeHintForRow(0) * list->count() + 2 * list->frameWidth());
 
     //   -> treeWidget
-    setupFileSystemTreeWidget();
+    setupFileSystemModel();
+
 }
 
 MainWindow::~MainWindow()
@@ -59,19 +60,22 @@ void MainWindow::on_searchSettigns_pb_clicked()
     }
 }
 
-void MainWindow::setupFileSystemTreeWidget()
+void MainWindow::setupFileSystemModel()
 {
     dirModel = new QFileSystemModel(this);
     dirModel->setRootPath(QDir::currentPath());
     qDebug() << QDir::currentPath();
     dirModel->setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
     QStringList stringFilter;
-    stringFilter << "[A-z]*";
+    stringFilter << "[A-z]*"; // Don't keep files that begin by "."
     dirModel->setNameFilters(stringFilter);
     dirModel->setNameFilterDisables(false);
 
     // Setup the view
     ui->folderTreeView->setModel(dirModel);
+    ui->listView->setModel(dirModel);
+
+    // Setup the root dir
     const QString rootPath = QDir::homePath();
     ui->folderTreeView->setRootIndex(dirModel->index(rootPath));
 
@@ -85,4 +89,19 @@ void MainWindow::setupFileSystemTreeWidget()
     qDebug() << splitterSize;
     QList<int> sizeList = {100, splitterSize - 100};
     ui->splitter->setSizes(sizeList);
+
+    ui->listView->setViewMode(QListView::ViewMode::ListMode);
+}
+
+
+void MainWindow::on_folderTreeView_activated(const QModelIndex &index)
+{
+    ui->listView->setRootIndex(index);
+}
+
+void MainWindow::on_listView_activated(const QModelIndex &index)
+{
+    ui->listView->setRootIndex(index);
+    ui->folderTreeView->setCurrentIndex(index);
+    ui->folderTreeView->expand(index);
 }
