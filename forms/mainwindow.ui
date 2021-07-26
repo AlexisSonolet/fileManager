@@ -13,6 +13,66 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">*{
+background: #222222;
+color: #EEEEEE;
+}
+
+/* Buttons */
+QPushButton {
+background-color: #000000;
+}
+
+QPushButton:hover {
+background-color: #444444;
+}
+
+QPushButton:pressed {
+background-color: #333333;
+}
+
+/* Tree view */
+QTreeView {
+background: #333333;
+}
+
+/* List view */
+QListView {
+background: #333333;
+}
+
+/* Scroll bar */
+QScrollBar:vertical {
+border: 1px solid #999999;
+background:white;
+width:10px;
+margin: 0px 0px 0px 0px;
+border-radius: 20px
+}
+
+QScrollBar::handle:vertical {
+background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+stop: 0 rgb(200, 200, 200), stop: 0.5 rgb(100, 200, 250), stop:1 rgb(200, 200, 200));
+min-height: 0px;
+}
+
+QScrollBar::add-line:vertical {
+background: qlineargradient(x1:0, y1:0, x2:1, y2:0, 
+stop: 0 rgb(200, 200, 200), stop: 0.5 rgb(100, 200, 250), stop:1 rgb(200, 200, 200));
+height: 0px;
+subcontrol-position: bottom;
+subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical {
+background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+stop: 0 rgb(200, 200, 200), stop: 0.5 rgb(100, 200, 250), stop:1 rgb(200, 200, 200));
+height: 0 px;
+subcontrol-position: top;
+subcontrol-origin: margin;
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
@@ -125,6 +185,9 @@
            <width>16777215</width>
            <height>16777215</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background: #000000;</string>
          </property>
         </widget>
        </item>
@@ -267,12 +330,21 @@
          <height>16777215</height>
         </size>
        </property>
-       <attribute name="headerVisible">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="headerHidden">
         <bool>true</bool>
+       </property>
+       <attribute name="headerVisible">
+        <bool>false</bool>
        </attribute>
       </widget>
       <widget class="QWidget" name="verticalLayoutWidget">
        <layout class="QVBoxLayout" name="folderAreaLayout">
+        <property name="spacing">
+         <number>0</number>
+        </property>
         <property name="sizeConstraint">
          <enum>QLayout::SetDefaultConstraint</enum>
         </property>
@@ -301,21 +373,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QScrollArea" name="foldersAreaWidget">
-          <property name="widgetResizable">
-           <bool>true</bool>
-          </property>
-          <widget class="QWidget" name="scrollAreaWidgetContents">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>267</width>
-             <height>384</height>
-            </rect>
-           </property>
-          </widget>
-         </widget>
+         <widget class="QListView" name="listView"/>
         </item>
        </layout>
       </widget>

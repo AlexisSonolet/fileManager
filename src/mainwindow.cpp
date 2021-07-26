@@ -29,6 +29,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Setup widgets
     setupFileSystemTreeWidget();
+    ui->search_fileName_cb->setCheckState(Qt::CheckState::Checked);
+    ui->search_folderName_cb->setCheckState(Qt::CheckState::Checked);
+    ui->search_fileContent_cb->setCheckState(Qt::CheckState::Unchecked);
 
 }
 
@@ -64,6 +67,6 @@ void MainWindow::setupFileSystemTreeWidget()
     // Set the width
     int splitterSize = ui->splitter->sizeHint().rwidth();
     qDebug() << splitterSize;
-    QList<int> sizeList = {10, splitterSize - 10};
+    QList<int> sizeList = {100, splitterSize - 100};
     ui->splitter->setSizes(sizeList);
 }
