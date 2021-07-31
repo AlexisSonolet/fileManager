@@ -62,31 +62,37 @@ void MainWindow::on_searchSettigns_pb_clicked()
 
 void MainWindow::setupFileSystemModel()
 {
-    dirModel = new QFileSystemModel(this);
-    dirModel->setRootPath(QDir::currentPath());
+    treeDirModel = new QFileSystemModel(this);
+    listDirModel = new QFileSystemModel(this);
+    treeDirModel->setRootPath(QDir::currentPath());
+    listDirModel->setRootPath(QDir::currentPath());
     qDebug() << QDir::currentPath();
-    dirModel->setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
+    treeDirModel->setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
+    listDirModel->setFilter(QDir::AllEntries | QDir::NoDotAndDotDot);
     QStringList stringFilter;
     stringFilter << "[A-z]*"; // Don't keep files that begin by "."
-    dirModel->setNameFilters(stringFilter);
-    dirModel->setNameFilterDisables(false);
+    treeDirModel->setNameFilters(stringFilter);
+    listDirModel->setNameFilters(stringFilter);
+    treeDirModel->setNameFilterDisables(false);
+    listDirModel->setNameFilterDisables(false);
 
     // Setup the view
-    ui->folderTreeView->setModel(dirModel);
-    ui->listView->setModel(dirModel);
+    ui->folderTreeView->setModel(treeDirModel);
+    ui->listView->setModel(listDirModel);
 
     // Setup the root dir
-    const QString rootPath = QDir::homePath();
-    ui->folderTreeView->setRootIndex(dirModel->index(rootPath));
+    rootPath = QDir::homePath();
 
-    // Hide other columns
-    for (int i=1; i < dirModel->columnCount(); i++) {
+    ui->folderTreeView->setRootIndex(treeDirModel->index(rootPath));
+    ui->listView->setRootIndex(listDirModel->index(rootPath));
+
+    // Hide other columns of treeDirModel
+    for (int i=1; i < treeDirModel->columnCount(); i++) {
         ui->folderTreeView->hideColumn(i);
     }
 
     // Set the width
     int splitterSize = ui->splitter->sizeHint().rwidth();
-    qDebug() << splitterSize;
     QList<int> sizeList = {100, splitterSize - 100};
     ui->splitter->setSizes(sizeList);
 
@@ -96,7 +102,9 @@ void MainWindow::setupFileSystemModel()
 
 void MainWindow::on_folderTreeView_activated(const QModelIndex &index)
 {
-    ui->listView->setRootIndex(index);
+    QString path = FilePaths.modelIndexToAbsolutePath(index, rootPath);
+
+    ui->listView->setRootIndex(listDirModel->index(path));
 }
 
 void MainWindow::on_listView_activated(const QModelIndex &index)

@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "filepathmanager.h"
+
 #include <QMainWindow>
 #include <QDialog>
 #include <QtCore>
@@ -37,9 +39,14 @@ private:
     bool isOsWin = false;
 
     // Setup widgets
-    QFileSystemModel *dirModel;
+    QFileSystemModel *treeDirModel;
+    QFileSystemModel *listDirModel;
 
     // Current directory
     QDir currentDir;
+    QString rootPath;
+
+    // Filepath manager
+    filepathManager FilePaths;
 };
 #endif // MAINWINDOW_H
