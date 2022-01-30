@@ -23,9 +23,9 @@ MainWindow::MainWindow(QWidget *parent)
         qDebug("OS : Windows");
     }
 
-
     // Hide search tab layout
     ui->searchTabLayout->hide();
+    ui->displayTabWidget->hide();
 
     // Setup widgets
     // -> Top view
@@ -43,6 +43,10 @@ MainWindow::MainWindow(QWidget *parent)
     //   -> treeWidget
     setupFileSystemModel();
 
+    // Setup tabs
+    tabList = QList<folderTabWidget>();
+    folderTabWidget defaultWidget;
+    tabList << defaultWidget;
 }
 
 MainWindow::~MainWindow()
@@ -56,9 +60,22 @@ void MainWindow::on_searchSettigns_pb_clicked()
     if (ui->searchTabLayout->isVisible()) {
         ui->searchTabLayout->hide();
     } else {
+        ui->displayTabWidget->hide();
         ui->searchTabLayout->show();
     }
 }
+
+
+void MainWindow::on_displaySettings_pb_clicked()
+{
+    if (ui->displayTabWidget->isVisible()) {
+        ui->displayTabWidget->hide();
+    } else {
+        ui->searchTabLayout->hide();
+        ui->displayTabWidget->show();
+    }
+}
+
 
 void MainWindow::setupFileSystemModel()
 {

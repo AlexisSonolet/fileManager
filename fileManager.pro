@@ -16,10 +16,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     src/filepathmanager.cpp \
+    src/foldertab.cpp \
     src/main.cpp \
     src/mainwindow.cpp
 
 HEADERS += \
+    headers/foldertab.h \
     headers/mainwindow.h \
     headers/filepathmanager.h
 
@@ -30,3 +32,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    conf/confLinux.yaml

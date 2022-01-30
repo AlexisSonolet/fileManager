@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "filepathmanager.h"
+#include "foldertab.h"
 
 #include <QMainWindow>
 #include <QDialog>
@@ -29,6 +30,8 @@ public:
 private slots:
     void on_searchSettigns_pb_clicked();
 
+    void on_displaySettings_pb_clicked();
+
     void on_folderTreeView_activated(const QModelIndex &index);
 
     void on_listView_activated(const QModelIndex &index);
@@ -45,6 +48,9 @@ private:
     // Current directory
     QDir currentDir;
     QString rootPath;
+
+    QList<folderTabWidget> tabList;
+    int currentTabIndex = 0;
 
     // Filepath manager
     filepathManager FilePaths;
