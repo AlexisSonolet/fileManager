@@ -3,6 +3,7 @@
 
 folderTabWidget::folderTabWidget(QWidget *parent)
 {
+
 }
 
 folderTabWidget::folderTabWidget(folderTabWidget &oldTab, QWidget *parent)
